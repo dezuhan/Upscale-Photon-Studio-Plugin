@@ -1,0 +1,11 @@
+{
+  "host": "127.0.0.1",
+  "port": 8765,
+  "models": "models",
+  "out": "out",
+  "binary": "",
+  "engine": "auto",
+  "gpu": "",
+  "tile": 0,
+  "extraArgs": []
+}

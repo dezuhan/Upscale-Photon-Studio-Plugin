@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Upscale</title>
+    <link rel="stylesheet" href="panel.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <header class="panel-head">
+        <h1 class="title">Upscale</h1>
+        <div class="head-status">
+          <span id="timing" class="timing"></span>
+          <span id="badge" class="badge">Ready</span>
+        </div>
+      </header>
+
+      <div class="field">
+        <label class="label" for="model">Model</label>
+        <span class="select">
+          <select id="model"></select>
+          <span class="chevron" aria-hidden="true"></span>
+        </span>
+      </div>
+
+      <p id="modelHint" class="hint">ncnn: ready · pillow: ready</p>
+
+      <div class="row">
+        <div class="field">
+          <label class="label" for="scale">Scale</label>
+          <span class="select">
+            <select id="scale">
+              <option value="1">1X</option>
+              <option value="2" selected>2X</option>
+              <option value="3">3X</option>
+              <option value="4">4X</option>
+            </select>
+            <span class="chevron" aria-hidden="true"></span>
+          </span>
+        </div>
+        <div class="field">
+          <label class="label" for="engine">Engine</label>
+          <span class="select">
+            <select id="engine">
+              <option value="auto" selected>Auto</option>
+              <option value="ncnn">ncnn</option>
+              <option value="pillow">Pillow</option>
+            </select>
+            <span class="chevron" aria-hidden="true"></span>
+          </span>
+        </div>
+      </div>
+
+      <label class="check">
+        <input type="checkbox" id="matchSize" checked />
+        <span>Fit to original layer</span>
+      </label>
+
+      <label class="check">
+        <input type="checkbox" id="hideSource" checked />
+        <span>Hide the original layer</span>
+      </label>
+
+      <div class="actions">
+        <button id="run" class="button" type="button">Upscale</button>
+        <button id="cancel" class="button cancel" type="button" hidden>Cancel</button>
+      </div>
+
+      <div class="progress" id="progress" hidden>
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <p id="reason" class="reason" hidden></p>
+
+      <footer class="panel-footer">
+        <span id="service">service: not checked</span>
+        <div class="footer-actions">
+          <button id="details" class="link-button" type="button">Details</button>
+          <button id="refresh" class="link-button" type="button">Check service</button>
+        </div>
+      </footer>
+    </main>
+
+    <div class="overlay" id="detailsOverlay" hidden>
+      <div class="overlay-card" role="dialog" aria-label="System and log details">
+        <header class="overlay-head">
+          <div class="tabs" role="tablist">
+            <button id="tabSystem" class="tab active" type="button" role="tab">System</button>
+            <button id="tabLog" class="tab" type="button" role="tab">Log</button>
+          </div>
+          <button id="detailsClose" class="link-button" type="button">Close</button>
+        </header>
+        <pre id="systemText" class="overlay-log"></pre>
+        <pre id="logText" class="overlay-log" hidden></pre>
+      </div>
+    </div>
+
+    <script src="select.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

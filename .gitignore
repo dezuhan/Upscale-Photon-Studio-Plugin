@@ -1,0 +1,31 @@
+# Generated upscaled images
+service/out/*
+!service/out/.gitkeep
+
+# Local model files (bring your own .param/.bin pairs)
+service/models/*
+!service/models/.gitkeep
+!service/models/README.md
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Service log (hidden/autostart mode)
+service/logs/
+tools/service-hidden.vbs
+
+# Local overrides
+config.local.json
+service/config.local.json
+
+# OS noise
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editor noise
+.vscode/
+.idea/

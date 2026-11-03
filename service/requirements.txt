@@ -1,0 +1,7 @@
+# No third-party dependency is required for the ncnn engine
+# (upscayl-bin / realesrgan-ncnn-vulkan shipped with Upscayl).
+#
+# Pillow is only needed for:
+#   - the "pillow" engine (fallback with no model)
+#   - exact resizing when the requested scale differs from the model's native scale
+pillow>=10.0

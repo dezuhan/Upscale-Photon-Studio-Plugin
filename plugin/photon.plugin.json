@@ -1,0 +1,31 @@
+{
+  "manifestVersion": 1,
+  "sdkVersion": 1,
+  "id": "photon-upscale",
+  "name": "Upscale",
+  "version": "1.0.25",
+  "main": "index.html",
+  "panels": [
+    {
+      "id": "upscale",
+      "label": "Upscale",
+      "ui": "custom",
+      "minimumSize": { "width": 340, "height": 480 }
+    }
+  ],
+  "commands": [
+    {
+      "id": "upscale.run",
+      "label": "Upscale Selected Layer",
+      "scope": "document",
+      "panel": "upscale",
+      "menu": "Plugins",
+      "binding": "Ctrl+Shift+U",
+      "keywords": ["upscale", "resize", "enhance", "esrgan", "upscayl"]
+    }
+  ],
+  "permissions": {
+    "document": "readWrite",
+    "customEndpoints": true
+  }
+}
