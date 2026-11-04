@@ -73,6 +73,11 @@ decided by Photon when the pixels are written back.
 
 ## Changelog
 
+### 1.0.29
+
+- Footer now shows only the service version on the left; `Details` and `Check service` stay on the
+  right, matching the design-system footer pattern.
+
 ### 1.0.28
 
 - Header now includes the design-system activity word (`Idle · Ready`) next to the badge.

@@ -591,7 +591,7 @@ async function refreshService() {
     const health = reply.body;
     if (health.ok !== true) throw new Error(health.error || "The service is not ready.");
 
-    el.service.textContent = `service: ok · v${health.version}`;
+    el.service.textContent = `v${health.version}`;
     engineInfo = { binary: health.binaryPath, pillow: health.pillow };
     applyModels(health.models || [], {
       binary: health.binaryPath,
@@ -607,7 +607,7 @@ async function refreshService() {
     await discoverOperations();
     log(`${operationIds.size} document operation(s) available`);
   } catch (error) {
-    el.service.textContent = "service: unreachable";
+    el.service.textContent = "unreachable";
     badge("Offline", "error");
     el.badge.title = networkHint(error);
     setReason(compactError(networkHint(error)));
