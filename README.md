@@ -73,6 +73,11 @@ decided by Photon when the pixels are written back.
 
 ## Changelog
 
+### 1.0.30
+
+- Details tabs use the canonical `tabs.js` slider (220 ms ease).
+- Panel padding is 12 px again and the gap follows the 10 px rhythm, matching the design system.
+
 ### 1.0.29
 
 - Footer now shows only the service version on the left; `Details` and `Check service` stay on the
