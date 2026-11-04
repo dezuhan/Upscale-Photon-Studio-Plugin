@@ -33,6 +33,8 @@ const el = {
   progress: document.getElementById("progress"),
   progressFill: document.getElementById("progressFill"),
   badge: document.getElementById("badge"),
+  state: document.getElementById("state"),
+  sep: document.getElementById("sep"),
   timing: document.getElementById("timing"),
   reason: document.getElementById("reason"),
   details: document.getElementById("details"),
@@ -159,6 +161,12 @@ function badge(label, kind) {
   el.badge.classList.toggle("busy", kind === "busy");
   el.badge.classList.toggle("ok", kind === "ok");
   el.badge.classList.toggle("danger", kind === "error");
+  const activity = kind === "busy" ? "Working" : kind === "error" ? "Error" : label === "Ready" ? "Idle" : label;
+  if (el.state) {
+    el.state.textContent = activity;
+    el.state.hidden = !activity;
+  }
+  if (el.sep) el.sep.hidden = !activity;
 }
 
 function formatDuration(ms) {

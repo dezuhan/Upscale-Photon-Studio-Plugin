@@ -670,3 +670,11 @@ select:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* design-system header contract */
+.state,
+.sep {
+  color: var(--tz-muted);
+  font-size: 10px;
+}

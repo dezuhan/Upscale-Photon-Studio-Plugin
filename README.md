@@ -23,6 +23,12 @@ Models go in `service/models/` (not in git because of their size).
 | --- | --- | --- |
 | ![Panel](docs/panel-dark.png) | ![Running](docs/panel-running.png) | ![Details](docs/panel-details.png) |
 
+## Design system
+
+Panel styling, components and tokens follow [`../design-system`](../design-system/README.md):
+24 px controls, 7 px control radius, 12 px floating surfaces, the canonical `select.js`
+dropdown and the shared header/footer contract.
+
 ## Install
 
 ```powershell
@@ -66,6 +72,10 @@ Only the source layer has to fit Photon's pixel transfer (16 MP); how large the 
 decided by Photon when the pixels are written back.
 
 ## Changelog
+
+### 1.0.28
+
+- Header now includes the design-system activity word (`Idle · Ready`) next to the badge.
 
 ### 1.0.27
 
