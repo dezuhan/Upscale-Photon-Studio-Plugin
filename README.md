@@ -31,8 +31,8 @@ Models go in `service/models/` (not in git because of their size).
 macOS / Linux use the shell equivalents:
 
 ```bash
-chmod +x tools/*.sh
-./tools/start-service.sh
+./tools/start-service.sh          # the .sh files are committed executable
+# if your checkout lost the bit:  chmod +x tools/*.sh
 ```
 
 ### Run the service hidden (recommended, Windows)
