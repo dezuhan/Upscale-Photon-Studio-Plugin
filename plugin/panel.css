@@ -717,3 +717,34 @@ select:focus-visible {
   color: var(--tz-muted);
   font-size: 10px;
 }
+
+
+/* ---------- details log actions ---------- */
+
+.head-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--tz-muted);
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background: var(--tz-control-hover);
+  color: var(--tz-text);
+}
+
+.icon-button.is-copied {
+  color: var(--tz-accent);
+}

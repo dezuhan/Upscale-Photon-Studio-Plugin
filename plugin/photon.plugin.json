@@ -3,7 +3,7 @@
   "sdkVersion": 1,
   "id": "photon-upscale",
   "name": "Upscale",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "main": "index.html",
   "panels": [
     {

@@ -73,6 +73,10 @@ decided by Photon when the pixels are written back.
 
 ## Changelog
 
+### 1.0.31
+
+- Details overlay now has a **copy all logs** icon (system clipboard, with a textarea fallback).
+
 ### 1.0.30
 
 - Details tabs use the canonical `tabs.js` slider (220 ms ease).

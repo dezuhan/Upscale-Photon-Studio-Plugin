@@ -40,6 +40,7 @@ const el = {
   details: document.getElementById("details"),
   detailsOverlay: document.getElementById("detailsOverlay"),
   detailsClose: document.getElementById("detailsClose"),
+  copyLog: document.getElementById("copyLog"),
   tabSystem: document.getElementById("tabSystem"),
   tabLog: document.getElementById("tabLog"),
   systemText: document.getElementById("systemText"),
@@ -143,6 +144,30 @@ function showTab(which) {
   el.systemText.hidden = !system;
   el.logText.hidden = system;
   if (!system) renderLog();
+}
+
+async function copyAllLogs() {
+  const text = (el.logText && el.logText.textContent) || "No log yet.";
+  const done = () => {
+    el.copyLog.classList.add("is-copied");
+    el.copyLog.title = "Copied";
+    setTimeout(() => {
+      el.copyLog.classList.remove("is-copied");
+      el.copyLog.title = "Copy all logs";
+    }, 1200);
+  };
+  try {
+    await navigator.clipboard.writeText(text);
+    done();
+  } catch {
+    const area = document.createElement("textarea");
+    area.value = text;
+    document.body.append(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+    done();
+  }
 }
 
 function openDetails() {
@@ -1047,6 +1072,7 @@ function wire() {
     el.detailsOverlay.hidden ? openDetails() : closeDetails(),
   );
   el.detailsClose.addEventListener("click", closeDetails);
+  el.copyLog.addEventListener("click", () => void copyAllLogs());
   el.tabSystem.addEventListener("click", () => showTab("system"));
   el.tabLog.addEventListener("click", () => showTab("log"));
   el.detailsOverlay.addEventListener("click", (event) => {
