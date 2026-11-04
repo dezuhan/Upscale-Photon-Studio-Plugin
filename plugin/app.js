@@ -182,10 +182,6 @@ function setReason(text, kind) {
 
 const ERROR_HINTS = [
   [
-    /above the 16 MP|above the 8192px|result would be .*above|melebihi/i,
-    "Scale too high — use 2×, a smaller model, or start from a smaller layer.",
-  ],
-  [
     /ran out of memory|vkallocatememory|out of device memory/i,
     'GPU out of memory — lower the scale, or set "tile": 512 in service/config.json.',
   ],
@@ -324,7 +320,7 @@ async function trackServiceProgress(pending) {
 function readControls() {
   return {
     model: el.model.value || "",
-    scale: Number(el.scale.value) || 2,
+    scale: Math.max(1, Math.round(Number(el.scale.value) || 2)),
     engine: el.engine.value || "auto",
     matchSize: el.matchSize.checked,
     hideSource: el.hideSource.checked,
@@ -388,7 +384,6 @@ function padTopLeft(image, x, y) {
   if (!x && !y) return image;
   const width = image.width + x;
   const height = image.height + y;
-  LIMITS.checkPadded(width, height);
   const out = new Uint8Array(width * height * 4);
   const rowBytes = image.width * 4;
   for (let row = 0; row < image.height; row += 1) {
@@ -795,9 +790,6 @@ async function run() {
       throw new Error("This layer has no raster pixels. Rasterize text or vector layers first.");
     }
     LIMITS.checkSource(width, height);
-    const outWidth = width * settings.scale;
-    const outHeight = height * settings.scale;
-    LIMITS.checkScaled(outWidth, outHeight, settings.scale);
 
     const rgba = toRgba(read.pixels, info.components, width, height);
     log(`source ${width}×${height} · ${info.components} components · target ${settings.scale}×`);

@@ -61,8 +61,18 @@ launchd LaunchAgent / systemd `--user` unit.
    the same position.
 4. **Details** next to *Check service* shows system info, available models and the service log.
 
-Limits: 16 MP and 8192 px per side for the plugin's pixel transfer; larger layers or results are
-rejected with an explicit message before any work starts.
+Scale is a free number field: any value from 1× upward is accepted, with no output-size cap.
+Only the source layer has to fit Photon's pixel transfer (16 MP); how large the *result* may be is
+decided by Photon when the pixels are written back.
+
+## Changelog
+
+### 1.0.27
+
+- **Scale is unrestricted.** The Scale control is a free number field (was a 1–4× dropdown), the
+  plugin no longer refuses large results (`checkScaled`/`checkPadded` removed) and the service accepts
+  any scale ≥ 1 (was 1–8). The "Scale too high" hint is gone; if Photon itself refuses a result, its
+  own error is shown.
 
 ## Testing
 

@@ -235,6 +235,20 @@ select:focus-visible {
   color: var(--tz-text);
 }
 
+.number-input {
+  width: 100%;
+  height: var(--tz-control-height);
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--tz-radius-control);
+  background: var(--tz-raise), var(--tz-control);
+  box-shadow: var(--tz-hairline);
+  color: var(--tz-text);
+  font-size: var(--tz-text-base);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
 .chevron {
   position: absolute;
   top: 50%;

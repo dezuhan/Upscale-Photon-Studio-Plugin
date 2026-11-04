@@ -24,28 +24,9 @@ test("checkSource accepts a normal layer and rejects empty or oversized ones", (
   assert.throws(() => Limits.checkSource(4000, 5000), /above the 16 MP limit/);
 });
 
-test("checkScaled enforces the per-side limit", () => {
-  Limits.checkScaled(4096, 4096, 2);
-  assert.throws(() => Limits.checkScaled(9000, 100, 3), /above the 8192px per-side limit/);
-});
-
-test("checkScaled enforces the total pixel limit", () => {
-  Limits.checkScaled(4096, 4096, 2); // exactly 16 MP, legal
-  assert.throws(() => Limits.checkScaled(5000, 4000, 2), /above the 16 MP layer limit/);
-});
-
-test("checkPadded guards the fallback placement", () => {
-  assert.deepEqual(Limits.checkPadded(100, 200), { width: 100, height: 200 });
-  assert.throws(() => Limits.checkPadded(9000, 100), /above the plugin limits/);
-  assert.throws(() => Limits.checkPadded(5000, 5000), /above the plugin limits/);
-});
-
-test("custom limits are honoured (testability)", () => {
-  const small = { maxEdge: 100, maxPixels: 1000 };
-  assert.throws(() => Limits.checkSource(50, 50, small), /above the/);
-  Limits.checkSource(20, 20, small);
-  assert.throws(() => Limits.checkScaled(200, 10, 2, small), /per-side/);
-  assert.throws(() => Limits.checkPadded(90, 90, small), /above the plugin limits/);
+test("there is no output-size guard any more (scale is unrestricted)", () => {
+  assert.equal(typeof Limits.checkScaled, "undefined");
+  assert.equal(typeof Limits.checkPadded, "undefined");
 });
 
 test("the megapixel label is percent-free and rounded", () => {

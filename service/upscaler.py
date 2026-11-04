@@ -416,8 +416,8 @@ def upscale(
     cancel_event=None,
 ) -> dict:
     """Upscale a PNG and return the resulting bytes plus metadata."""
-    if not 1 <= scale <= 8:
-        raise UpscaleError("Scale must be between 1 and 8.")
+    if scale < 1:
+        raise UpscaleError("Scale must be at least 1.")
     if not png_bytes:
         raise UpscaleError("The image payload is empty.")
     _raise_if_cancelled(cancel_event)
