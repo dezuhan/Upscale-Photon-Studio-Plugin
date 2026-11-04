@@ -14,8 +14,10 @@
 
 const SDK = globalThis.__photonSdk;
 const DEFAULT_ORIGIN = "http://127.0.0.1:8765";
-const MAX_EDGE = 8192; // images.encode / images.decode limit
-const MAX_PIXELS = 16 * 1024 * 1024; // 16 MP plugin pixel-transfer limit
+const LIMITS = globalThis.PhotonLimits;
+const MAX_EDGE = LIMITS.MAX_EDGE; // images.encode / images.decode limit
+const MAX_PIXELS = LIMITS.MAX_PIXELS; // 16 MP plugin pixel-transfer limit
+const POLL_MS = 400; // progress poll cadence while the service works
 
 const el = {
   model: document.getElementById("model"),
@@ -302,7 +304,7 @@ async function trackServiceProgress(pending) {
     },
   );
   while (!settled) {
-    await new Promise((resolve) => setTimeout(resolve, 250));
+    await new Promise((resolve) => setTimeout(resolve, POLL_MS));
     if (settled) break;
     try {
       const info = await request(`${serviceOrigin}/progress`, { method: "GET" });
@@ -386,9 +388,7 @@ function padTopLeft(image, x, y) {
   if (!x && !y) return image;
   const width = image.width + x;
   const height = image.height + y;
-  if (width > MAX_EDGE || height > MAX_EDGE || width * height > MAX_PIXELS) {
-    throw new Error(`Placing at ${x},${y} would need a ${width}×${height} layer, above the plugin limits.`);
-  }
+  LIMITS.checkPadded(width, height);
   const out = new Uint8Array(width * height * 4);
   const rowBytes = image.width * 4;
   for (let row = 0; row < image.height; row += 1) {
@@ -794,20 +794,10 @@ async function run() {
     if (!width || !height) {
       throw new Error("This layer has no raster pixels. Rasterize text or vector layers first.");
     }
-    if (width * height > MAX_PIXELS) {
-      throw new Error(`Layer is ${width}×${height}, above the ${MAX_PIXELS / 1048576} MP limit.`);
-    }
+    LIMITS.checkSource(width, height);
     const outWidth = width * settings.scale;
     const outHeight = height * settings.scale;
-    if (Math.max(outWidth, outHeight) > MAX_EDGE) {
-      throw new Error(`The result would be ${outWidth}×${outHeight}, above the ${MAX_EDGE}px per-side limit.`);
-    }
-    if (outWidth * outHeight > MAX_PIXELS) {
-      throw new Error(
-        `A ${settings.scale}× result would be ${outWidth}×${outHeight}, above the ` +
-          `${MAX_PIXELS / 1048576} MP layer limit. Use a smaller scale.`,
-      );
-    }
+    LIMITS.checkScaled(outWidth, outHeight, settings.scale);
 
     const rgba = toRgba(read.pixels, info.components, width, height);
     log(`source ${width}×${height} · ${info.components} components · target ${settings.scale}×`);

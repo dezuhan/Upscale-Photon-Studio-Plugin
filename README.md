@@ -615,6 +615,16 @@ popup, `--ph-control-active` for the selected row, `--ph-soft` scrollbar thumb, 
 
 ## Changelog
 
+### 1.0.26
+
+- Progress polling relaxed from 250 ms to **400 ms** (≈2.5 requests/s instead of 4 while the local
+  service works).
+- The pixel-transfer limits moved into `plugin/limits.js` (`checkSource`, `checkScaled`,
+  `checkPadded`) instead of inline throws, so they are testable.
+- `tools/upscale-test.cjs` added: 7 tests covering the 8192 px / 16 MP boundaries and the
+  fallback-placement guard.
+
+
 ### 1.0.25
 
 - **Cancel button** in the panel: while a run is in progress the Upscale button is disabled and a
@@ -883,3 +893,9 @@ That covers **this project's code only**. Two things it cannot cover:
 
 Read [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) before publishing or selling anything
 built on this plugin. Not legal advice.
+
+## Testing
+
+```powershell
+node tools/upscale-test.cjs     # 7 tests: pixel-transfer limits (8192 px / 16 MP)
+```

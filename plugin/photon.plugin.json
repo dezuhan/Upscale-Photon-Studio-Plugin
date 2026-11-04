@@ -3,14 +3,17 @@
   "sdkVersion": 1,
   "id": "photon-upscale",
   "name": "Upscale",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "main": "index.html",
   "panels": [
     {
       "id": "upscale",
       "label": "Upscale",
       "ui": "custom",
-      "minimumSize": { "width": 340, "height": 480 }
+      "minimumSize": {
+        "width": 340,
+        "height": 480
+      }
     }
   ],
   "commands": [
@@ -21,7 +24,13 @@
       "panel": "upscale",
       "menu": "Plugins",
       "binding": "Ctrl+Shift+U",
-      "keywords": ["upscale", "resize", "enhance", "esrgan", "upscayl"]
+      "keywords": [
+        "upscale",
+        "resize",
+        "enhance",
+        "esrgan",
+        "upscayl"
+      ]
     }
   ],
   "permissions": {
