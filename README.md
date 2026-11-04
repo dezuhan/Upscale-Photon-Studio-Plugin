@@ -17,6 +17,12 @@ runtime), with an **ncnn** engine when `upscayl-bin` and models are present, or 
 
 Models go in `service/models/` (not in git because of their size).
 
+## Screenshots
+
+| Panel | Running | Service details |
+| --- | --- | --- |
+| ![Panel](docs/panel-dark.png) | ![Running](docs/panel-running.png) | ![Details](docs/panel-details.png) |
+
 ## Install
 
 ```powershell
